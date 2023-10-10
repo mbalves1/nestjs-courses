@@ -1,11 +1,11 @@
-import { Body, Controller, Get, HttpCode, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, Param, Patch, Post, Res } from '@nestjs/common';
 
 @Controller('courses')
 export class CoursesController {
   
   @Get()
-  findAll() {
-    return 'This action returns all courses'
+  findAll(@Res() response) {
+    return response.status(200).json({ message: 'This actions return all'})
   }
 
   @Get(":id")
@@ -13,9 +13,21 @@ export class CoursesController {
     return `This action returns a course with id ${id}`
   }
 
-  @HttpCode(201)
   @Post()
   create(@Body() body) {
     return body
+  }
+
+  @Patch(":id")
+  update(@Param("id") id: string, @Body() body) {
+  
+    console.log(body); 
+    return `Update courses with ID ${body.id}`
+  }
+
+  @HttpCode(204)
+  @Delete(":id")
+  remove(@Param("id") id: string) {
+    return `Remove id ${id}`
   }
 }
