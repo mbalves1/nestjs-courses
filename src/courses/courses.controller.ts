@@ -13,7 +13,7 @@ export class CoursesController {
     return `This action returns a course with id ${id}`
   }
 
-  @HttpCode(204)
+  @HttpCode(201)
   @Post()
   create(@Body() body) {
     return body
