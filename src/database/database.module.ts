@@ -12,7 +12,7 @@ export const dataSourceOptions: DataSourceOptions = {
   password: 'admin',
   database: 'nesttrainer',
   entities: [Course, Tag],
-  synchronize: true
+  synchronize: false
 }
 
 @Module({

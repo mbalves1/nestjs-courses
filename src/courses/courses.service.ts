@@ -8,13 +8,11 @@ import { UpdateCourseDTO } from './dto/update-course.dto';
 
 @Injectable()
 export class CoursesService {
-  constructor(
-    @InjectRepository(Course)
-    private readonly courseRepository: Repository<Course>,
+  @InjectRepository(Course)
+  private readonly courseRepository: Repository<Course>
 
-    @InjectRepository(Tag)
-    private readonly tagRepository: Repository<Tag>,
-  ) {}
+  @InjectRepository(Tag)
+  private readonly tagRepository: Repository<Tag>
 
   async findAll() {
     return await this.courseRepository.find({
@@ -22,7 +20,7 @@ export class CoursesService {
     });
   }
 
-  async findOne(id: number) {
+  async findOne(id: string) {
     const course = await this.courseRepository.findOne({
       where: { id },
       relations: ['tags']
@@ -45,7 +43,7 @@ export class CoursesService {
     return this.courseRepository.save(course)
   }
 
-  async update(id: number, updateCoursesDTO: UpdateCourseDTO) {
+  async update(id: string, updateCoursesDTO: UpdateCourseDTO) {
     const tags = updateCoursesDTO.tags &&
       (await Promise.all(
         updateCoursesDTO.tags.map(name => this.preloadTagByName(name))
@@ -61,7 +59,7 @@ export class CoursesService {
     return this.courseRepository.save(course)
   }
 
-  async remove(id: number) {
+  async remove(id: string) {
     const course = await this.courseRepository.findOne({
       where: { id }
     })
