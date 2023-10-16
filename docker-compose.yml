@@ -12,3 +12,13 @@ services:
     environment:
       - POSTGRES_PASSWORD=admin
       - POSTGRES_DB=nesttrainer
+
+  dbtest:
+    build: .
+    container_name: marmota-teste
+    restart: always
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=nesttrainer
